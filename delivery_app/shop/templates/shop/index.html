@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script src="{% static 'js/jquery-3.7.0.min.js' %}"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <nav>
+        <ul class="navigate">
+            <li><a href="/">Shop</a></li>
+            <li><a href="card/">Shopping Card</a></li>
+            <li><a href="coupons/">Coupons</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="main">
+            <div class="shop_list">
+                <p>Shops:</p>
+                <a href="#" data-filter="McDonalds" class="shop_button"><span class="button_text">McDonalds</span></a>
+                <a href="#" data-filter="Kfc" class="shop_button"><span class="button_text">KFC</span></a>
+                <a href="#" data-filter="PapaJoe" class="shop_button"><span class="button_text">Papa Joe</span></a>
+                <a href="/" data-filter="etc" class="shop_button"><span class="button_text">etc.</span></a>
+
+            </div>
+
+            <div class="shop_items">
+                <div class="card_container">
+                {% for menu in menu %}
+
+                    {% if menu.group == "McDonalds" %}
+                    <div class="cards_border McDonalds">
+                        <img src="media/{{menu.img}}">
+                        <p> {{menu.description}} </p>
+                        <div class="card_button">
+                            <form method="post" action="order">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{menu.img}}" name="img" />
+                                <input type="hidden" value="{{menu.description}}" name="description" />
+                                <input type="hidden" value="{{menu.price}}" name="price" />
+
+                                <a href="#"><button type="submit" name="add to Cart" class="button_style">add to Cart</button></a>
+                            </form>
+                        </div>
+                    </div>
+
+                    {% elif menu.group == "Kfc" %}
+                    <div class="cards_border Kfc">
+                        <img src="media/{{menu.img}}">
+                        <p> {{menu.description}} </p>
+                        <div class="card_button">
+                            <form method="post" action="order">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{menu.img}}" name="img" />
+                                <input type="hidden" value="{{menu.description}}" name="description" />
+                                <input type="hidden" value="{{menu.price}}" name="price" />
+
+                                <a href="#"><button type="submit" name="add to Cart" class="button_style">add to Cart</button></a>
+                            </form>
+                        </div>
+                    </div>
+
+                    {% elif menu.group == "PapaJoe" %}
+                    <div class="cards_border PapaJoe">
+                        <img src="media/{{menu.img}}">
+                        <p> {{menu.description}} </p>
+                        <div class="card_button">
+                            <form method="post" action="order">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{menu.img}}" name="img" />
+                                <input type="hidden" value="{{menu.description}}" name="description" />
+                                <input type="hidden" value="{{menu.price}}" name="price" />
+
+                                <a href="#"><button type="submit" name="add to Cart" class="button_style">add to Cart</button></a>
+                            </form>
+                        </div>
+                    </div>
+
+                    {% elif menu.group == "etc" %}
+                    <div class="cards_border etc">
+                        <img src="media/{{menu.img}}">
+                        <p> {{menu.description}} </p>
+                        <div class="card_button">
+                            <form method="post" action="order">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{menu.img}}" name="img" />
+                                <input type="hidden" value="{{menu.description}}" name="description" />
+                                <input type="hidden" value="{{menu.price}}" name="price" />
+   
+                                <a href="#"><button type="submit" name="add to Cart" class="button_style">add to Cart</button></a>
+                            </form>
+                        </div>
+                    </div>
+
+                    {% endif %}
+
+                {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        var cards = $('.cards_border');
+        $(".shop_list a").click(function () {
+            var customType = $(this).data('filter');
+            console.log(customType);
+            cards.hide();
+            $("." + customType).show();
+        });
+    </script>
+
+</body>
+
+</html>

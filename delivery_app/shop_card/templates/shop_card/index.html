@@ -1,0 +1,130 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Document</title>
+</head>
+
+<body>
+    <nav>
+        <ul class="navigate">
+            <li><a href="/">Shop</a></li>
+            <li><a href="#">History</a></li>
+            <li><a href="/coupons">Coupons</a></li>
+        </ul>
+    </nav>
+
+    <main class="main">
+        <div class="main_content">
+            <div class="shop_list">
+                <p>Name:</p>
+                <input type="text">
+
+                <p>Email:</p>
+                <input type="email">
+
+                <p>Phone:</p>
+                <input type="number">
+
+                <p>Address:</p>
+                <input type="text">
+            </div>
+            <div class="shop_items">
+                {% for item in basket %}
+                <div class="card_container">
+                    <div class="cards">
+                        <div class="cards_border">
+                            <button onclick="removeCard(this)" class="button_style">Remove</button>
+                            <img src="\media/{{item.img}}">
+                            <div class="cord_content">
+                                <p> {{item.order_name}} </p>
+                                <p> Price: <span class='price'>{{item.price}}</span></p>
+                                <input type="number" class="card_number" value="1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="content">
+            <input type="text" class="coupons" placeholder="Discount Coupon">
+            <p>Total price: <span class='total'></span> </p>
+
+            <button type="submit">Submit</button>
+        </div>
+    </main>
+
+    <script>
+        // Получаем все элементы с классом 'price'
+        var prices = document.getElementsByClassName('price');
+        // Получаем элемент с классом 'total'
+        var totalElement = document.querySelector('.total');
+        // Получаем элемент с классом 'coupons'
+        var couponElement = document.querySelector('.coupons');
+        // Получаем все элементы с классом 'card_number'
+        var cardNumberInputs = document.querySelectorAll('.card_number');
+
+        // Функция для обновления суммы
+        function updateTotal() {
+            var total = 0;
+            for (var i = 0; i < prices.length; i++) {
+                // Преобразуем текст внутри элемента 'price' в число и добавляем к общей сумме
+                total += parseInt(prices[i].textContent);
+            }
+
+            for (var i = 0; i < prices.length; i++) {
+                var price = parseFloat(prices[i].textContent);
+                var quantity = parseInt(cardNumberInputs[i].value);
+                total += price * (quantity - 1);
+            }
+
+            // Проверяем, если в поле 'coupons' введено слово 'discount', уменьшаем сумму на 5%
+            if (couponElement.value === 'discount') {
+                total *= 0.95; // Умножаем на 0.95, чтобы получить 5% скидку
+            }
+
+            if (couponElement.value === 'turbo') {
+                total *= 0.9; // Умножаем на 0.9, чтобы получить 10% скидку
+            }
+
+            if (couponElement.value === 'max') {
+                total *= 0.8; // Умножаем на 0.9, чтобы получить 20% скидку
+            }
+
+            total = total.toFixed(2);
+            // Обновляем текст в элементе 'total'
+            totalElement.textContent = total;
+        }
+
+        function removeCard(button) {
+        // Находим родительский элемент 'cards_border' для кнопки
+            var cardContainer = button.closest('.cards_border');
+        // Удаляем родительский элемент из DOM
+            cardContainer.remove();
+        // Обновляем сумму после удаления элемента
+            updateTotal();
+        }
+
+        // Назначаем обработчик события на изменение значения в полях 'card_number'
+        for (var i = 0; i < cardNumberInputs.length; i++) {
+            cardNumberInputs[i].addEventListener('input', updateTotal);
+        }
+
+        // Назначаем обработчик события на изменение значения в поле 'coupons'
+        couponElement.addEventListener('input', updateTotal);
+
+        // Вызываем функцию updateTotal() в начальный момент времени, чтобы отобразить исходную сумму
+        updateTotal();
+
+
+
+    </script>
+</body>
+
+</html>

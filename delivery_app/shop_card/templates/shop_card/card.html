@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    {% for item in basket %}
+    <div class="card_container">
+        <div class="cards">
+            <div class="cards_border">
+                <img src="https://igroteka.ua/images/m/a/mashinka-metaleva-welly-audi-q3-43666cw-800x800.jpg">
+                <div class="cord_content">
+                <p> Big Big Burger </p>
+                <p> Price: 9999 </p>
+                <input type="number" class="card_number" value="0">
+                </div>
+            </div>
+
+        </div>
+    </div>
+    {% endfor %}
+
+</body>
+</html>
