@@ -1,4 +1,4 @@
-It's Django project
+It's Django project.
 How to run:
 1. Clone the project repository
 2. cd Eliftech_Test_app
