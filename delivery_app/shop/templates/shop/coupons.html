@@ -49,18 +49,23 @@
     </div>
 
     <script>
-        function myFunction(button) {
-          var inputElement = button.parentElement.parentElement.querySelector('.myInput');
-          var textToCopy = inputElement.value;
-  
-          navigator.clipboard.writeText(textToCopy)
-            .then(function() {
-              alert('Discount Copied');
-            window.location.href = '/card';  
-            });
-            
-        }
-      </script>
+      function myFunction(button) {
+        var inputElement = button.parentElement.parentElement.querySelector('.myInput');
+        var textToCopy = inputElement.value;
+
+        var dummyElement = document.createElement('textarea');
+        dummyElement.value = textToCopy;
+        document.body.appendChild(dummyElement);
+        dummyElement.select();
+        document.execCommand('copy');
+        document.body.removeChild(dummyElement);
+
+        alert('Discount Copied');
+        window.location.href = '/card';
+      }
+    </script>
+
+      
 </body>
 
 </html>
