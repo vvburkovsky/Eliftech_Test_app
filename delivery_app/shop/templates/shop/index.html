@@ -50,8 +50,9 @@
                             </form>
                         </div>
                     </div>
+                    {% endif %}
 
-                    {% elif menu.group == "Kfc" %}
+                    {% if menu.group == "Kfc" %}
                     <div class="cards_border Kfc">
                         <img src="media/{{menu.img}}">
                         <p> {{menu.description}} </p>
@@ -66,8 +67,9 @@
                             </form>
                         </div>
                     </div>
+                    {% endif %}
 
-                    {% elif menu.group == "PapaJoe" %}
+                    {% if menu.group == "PapaJoe" %}
                     <div class="cards_border PapaJoe">
                         <img src="media/{{menu.img}}">
                         <p> {{menu.description}} </p>
@@ -82,8 +84,9 @@
                             </form>
                         </div>
                     </div>
+                    {% endif %}
 
-                    {% elif menu.group == "etc" %}
+                    {% if menu.group == "etc" %}
                     <div class="cards_border etc">
                         <img src="media/{{menu.img}}">
                         <p> {{menu.description}} </p>
@@ -98,7 +101,6 @@
                             </form>
                         </div>
                     </div>
-
                     {% endif %}
 
                 {% endfor %}
