@@ -19,7 +19,6 @@ def order (request):
     b.save()
 
     return redirect('/')
-    #return render(request, 'shop\index.html', context)
 
 
 def coupons (request):
