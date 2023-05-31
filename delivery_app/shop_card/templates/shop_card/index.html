@@ -52,6 +52,16 @@
                     </div>
                 </div>
                 {% endfor %}
+                {%if not basket%}
+                <div class="card_container">
+                    <div class="cards">
+                        <div class="cards_border">
+                            <h1>Your basket is empty.</h1>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                
             </div>
         </div>
         <div class="content">

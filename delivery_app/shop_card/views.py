@@ -1,7 +1,5 @@
 from django.shortcuts import redirect, render
 from shop.models import Basket
-from shop.views import shop
-
 # Create your views here.
 def shop_card (request):
     
@@ -19,7 +17,7 @@ def basket (request):
 def delete_item (request, id):
     item = Basket.objects.get(id=id)
     item.delete()
-    
+
     return redirect(basket)
 
 def delete_items_all (request):
